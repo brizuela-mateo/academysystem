@@ -9,7 +9,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({StudentNotFoundException.class})
+    @ExceptionHandler(StudentNotFoundException.class)
     public ResponseEntity<?> handleStudentNotFound(StudentNotFoundException ex){
         //return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);

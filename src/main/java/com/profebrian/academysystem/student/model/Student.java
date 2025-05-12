@@ -1,5 +1,6 @@
-package com.profebrian.academysystem.registration.model;
+package com.profebrian.academysystem.student.model;
 
+import com.profebrian.academysystem.tutor.TutorDao;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,6 @@ public class Student {
     private Integer document;
 
     @ManyToOne
-    @JoinColumn(name="tutor_id")
-    private Tutor tutor;
+    @JoinColumn(name="tutor_id", referencedColumnName = "tutor_id")
+    private TutorDao tutor;
 }
