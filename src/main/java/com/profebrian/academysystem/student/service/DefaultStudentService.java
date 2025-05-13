@@ -5,7 +5,11 @@ import com.profebrian.academysystem.student.dto.StudentDto;
 import com.profebrian.academysystem.student.dto.StudentMapper;
 import com.profebrian.academysystem.student.model.Student;
 import com.profebrian.academysystem.student.repository.StudentRepository;
+import com.profebrian.academysystem.tutor.dto.TutorMapper;
+import com.profebrian.academysystem.tutor.service.TutorService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DefaultStudentService implements StudentService {
@@ -14,20 +18,28 @@ public class DefaultStudentService implements StudentService {
 
     private final StudentRepository studentRepository;
 
-    public DefaultStudentService(StudentMapper studentMapper, StudentRepository studentRepository) {
+    private final TutorService tutorService;
+
+    private final TutorMapper tutorMapper;
+
+    public DefaultStudentService(StudentMapper studentMapper, StudentRepository studentRepository, TutorService tutorService, TutorMapper tutorMapper) {
         this.studentMapper = studentMapper;
         this.studentRepository = studentRepository;
+        this.tutorService = tutorService;
+        this.tutorMapper = tutorMapper;
     }
 
     @Override
-    public Student saveStudent(StudentDto studentDto) {
+    public StudentDto saveStudent(StudentDto studentDto) {
         Student student = studentMapper.toStudent(studentDto);
-        return studentRepository.save(student);
+        var tutorId = studentDto.tutorId();
+        if (tutorId != null) student.setTutor(tutorMapper.toTutor(tutorService.findTutorById(tutorId)));
+        return studentMapper.toStudentDto(studentRepository.save(student));
     }
 
     @Override
-    public Iterable<Student> findAllStudents() {
-        return studentRepository.findAll();
+    public List<StudentDto> findAllStudents() {
+        return studentMapper.toStudentDtoList(studentRepository.findAll());
     }
 
     @Override

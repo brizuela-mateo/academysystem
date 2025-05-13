@@ -5,15 +5,22 @@ import com.profebrian.academysystem.student.model.Student;
 import com.profebrian.academysystem.student.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentDto> getStudentById(@PathVariable Integer id) {
@@ -22,7 +29,13 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createStudent(@Valid @RequestBody StudentDto studentDto) {
-        return ResponseEntity.ok("Test");
+    public ResponseEntity<StudentDto> createStudent(@Valid @RequestBody StudentDto studentDto) {
+        return ResponseEntity.ok(studentService.saveStudent(studentDto));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<StudentDto>> getAllStudents() {
+        List<StudentDto> students = studentService.findAllStudents();
+        return ResponseEntity.ok(students);
     }
 }

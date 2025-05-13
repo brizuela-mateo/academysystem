@@ -1,6 +1,6 @@
 package com.profebrian.academysystem.student.model;
 
-import com.profebrian.academysystem.tutor.TutorDao;
+import com.profebrian.academysystem.tutor.model.Tutor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +16,8 @@ import java.util.Date;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer student_id;
+    @Column(name = "student_id")
+    private Integer studentId;
 
     private String firstName;
 
@@ -28,5 +29,5 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name="tutor_id", referencedColumnName = "tutor_id")
-    private TutorDao tutor;
+    private Tutor tutor;
 }

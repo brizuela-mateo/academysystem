@@ -3,10 +3,12 @@ package com.profebrian.academysystem.student.service;
 import com.profebrian.academysystem.student.dto.StudentDto;
 import com.profebrian.academysystem.student.model.Student;
 
-public interface StudentService {
-    public Student saveStudent(StudentDto studentDto);
+import java.util.List;
 
-    public Iterable<Student> findAllStudents();
+public interface StudentService {
+    public StudentDto saveStudent(StudentDto studentDto);
+
+    public List<StudentDto> findAllStudents();
 
     public StudentDto findStudentById(Integer id);
 
