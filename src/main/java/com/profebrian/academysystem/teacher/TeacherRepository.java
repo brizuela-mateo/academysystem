@@ -1,6 +1,5 @@
-package com.profebrian.academysystem.student.repository;
+package com.profebrian.academysystem.teacher;
 
-import com.profebrian.academysystem.student.model.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

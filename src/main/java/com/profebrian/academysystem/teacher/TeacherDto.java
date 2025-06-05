@@ -1,4 +1,4 @@
-package com.profebrian.academysystem.student.dto;
+package com.profebrian.academysystem.teacher;
 
 public record TeacherDto(Integer teacherId,
                          String firstName,

@@ -1,4 +1,4 @@
-package com.profebrian.academysystem.student.model;
+package com.profebrian.academysystem.teacher;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

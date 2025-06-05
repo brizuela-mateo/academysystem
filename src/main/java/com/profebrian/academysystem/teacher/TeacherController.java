@@ -1,13 +1,10 @@
-package com.profebrian.academysystem.student.controller;
+package com.profebrian.academysystem.teacher;
 
-import com.profebrian.academysystem.student.dto.TeacherDto;
-import com.profebrian.academysystem.student.service.TeacherService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/teachers")

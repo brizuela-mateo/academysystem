@@ -1,6 +1,5 @@
-package com.profebrian.academysystem.tutor.dto;
+package com.profebrian.academysystem.tutor;
 
-import com.profebrian.academysystem.tutor.model.Tutor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

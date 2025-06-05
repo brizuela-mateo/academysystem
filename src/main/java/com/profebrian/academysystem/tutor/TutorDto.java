@@ -1,6 +1,4 @@
-package com.profebrian.academysystem.tutor.dto;
-
-import jakarta.validation.constraints.NotNull;
+package com.profebrian.academysystem.tutor;
 
 public record TutorDto(Integer tutorId,
                        String fullName,

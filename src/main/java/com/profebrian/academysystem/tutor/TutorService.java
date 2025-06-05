@@ -1,7 +1,5 @@
-package com.profebrian.academysystem.tutor.service;
+package com.profebrian.academysystem.tutor;
 
-import com.profebrian.academysystem.tutor.dto.TutorDto;
-import com.profebrian.academysystem.tutor.model.Tutor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,12 +1,8 @@
-package com.profebrian.academysystem.student.service;
+package com.profebrian.academysystem.student;
 
 import com.profebrian.academysystem.registration.exception.StudentNotFoundException;
-import com.profebrian.academysystem.student.dto.StudentDto;
-import com.profebrian.academysystem.student.dto.mapper.StudentMapper;
-import com.profebrian.academysystem.student.model.Student;
-import com.profebrian.academysystem.student.repository.StudentRepository;
-import com.profebrian.academysystem.tutor.dto.TutorMapper;
-import com.profebrian.academysystem.tutor.service.TutorService;
+import com.profebrian.academysystem.tutor.TutorMapper;
+import com.profebrian.academysystem.tutor.TutorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

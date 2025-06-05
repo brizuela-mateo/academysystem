@@ -1,4 +1,4 @@
-package com.profebrian.academysystem.student.dto;
+package com.profebrian.academysystem.student;
 
 import jakarta.validation.constraints.NotNull;
 import java.util.Date;

@@ -1,7 +1,5 @@
-package com.profebrian.academysystem.student.dto.mapper;
+package com.profebrian.academysystem.teacher;
 
-import com.profebrian.academysystem.student.dto.TeacherDto;
-import com.profebrian.academysystem.student.model.Teacher;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

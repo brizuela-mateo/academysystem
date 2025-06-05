@@ -1,4 +1,4 @@
-package com.profebrian.academysystem.tutor.model;
+package com.profebrian.academysystem.tutor;
 
 import jakarta.persistence.*;
 import lombok.Data;

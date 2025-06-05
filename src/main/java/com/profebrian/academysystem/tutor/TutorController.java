@@ -1,8 +1,5 @@
-package com.profebrian.academysystem.tutor.controller;
+package com.profebrian.academysystem.tutor;
 
-import com.profebrian.academysystem.tutor.dto.TutorDto;
-import com.profebrian.academysystem.tutor.model.Tutor;
-import com.profebrian.academysystem.tutor.service.TutorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

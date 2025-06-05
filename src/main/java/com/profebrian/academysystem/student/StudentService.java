@@ -1,7 +1,4 @@
-package com.profebrian.academysystem.student.service;
-
-import com.profebrian.academysystem.student.dto.StudentDto;
-import com.profebrian.academysystem.student.model.Student;
+package com.profebrian.academysystem.student;
 
 import java.util.List;
 

@@ -1,9 +1,5 @@
-package com.profebrian.academysystem.student.service;
+package com.profebrian.academysystem.teacher;
 
-import com.profebrian.academysystem.student.dto.TeacherDto;
-import com.profebrian.academysystem.student.dto.mapper.TeacherMapper;
-import com.profebrian.academysystem.student.model.Teacher;
-import com.profebrian.academysystem.student.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

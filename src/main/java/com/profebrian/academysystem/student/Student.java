@@ -1,6 +1,6 @@
-package com.profebrian.academysystem.student.model;
+package com.profebrian.academysystem.student;
 
-import com.profebrian.academysystem.tutor.model.Tutor;
+import com.profebrian.academysystem.tutor.Tutor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
