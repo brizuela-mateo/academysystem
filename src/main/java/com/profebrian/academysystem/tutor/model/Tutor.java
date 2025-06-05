@@ -21,7 +21,7 @@ public class Tutor
 
     private String email;
 
-    private Integer ruc;
+    private String ruc;
 
     @Column(name = "ruc_owner")
     private String rucOwner;

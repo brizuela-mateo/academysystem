@@ -16,7 +16,6 @@ public class TutorController {
 
     private final TutorService tutorService;
 
-
     public TutorController(TutorService tutorService) {
         this.tutorService = tutorService;
     }
@@ -27,11 +26,9 @@ public class TutorController {
     }
 
     @PostMapping
-    public ResponseEntity<TutorDto> createTutor(@RequestBody  @Valid TutorDto tutorDto) {
+    public ResponseEntity<TutorDto> createTutor(@RequestBody @Valid TutorDto tutorDto) {
         TutorDto savedTutor = tutorService.saveTutor(tutorDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTutor);
     }
-
-
 
 }

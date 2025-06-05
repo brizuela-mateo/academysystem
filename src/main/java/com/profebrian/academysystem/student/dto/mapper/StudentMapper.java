@@ -1,8 +1,8 @@
-package com.profebrian.academysystem.student.dto;
+package com.profebrian.academysystem.student.dto.mapper;
 
+import com.profebrian.academysystem.student.dto.StudentDto;
 import com.profebrian.academysystem.student.model.Student;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

@@ -6,7 +6,7 @@ public record TutorDto(Integer tutorId,
                        String fullName,
                        Integer cellphoneNumber,
                        String email,
-                       Integer ruc,
+                       String ruc,
                        String rucOwner,
                        Integer mainTutorId) {
 }
