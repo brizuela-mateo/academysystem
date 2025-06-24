@@ -26,8 +26,7 @@ public class Tutor
     @Column(name = "ruc_owner")
     private String rucOwner;
 
-    @ManyToOne
-    @JoinColumn(name = "main_tutor_id", referencedColumnName = "tutor_id")
-    private Tutor mainTutor;
+    @Column(name = "main_tutor_id")
+    private Integer mainTutorId;
 
 }

@@ -10,4 +10,5 @@ public interface StudentService {
     public StudentDto findStudentById(Integer id);
 
     public void deleteStudentById(Integer id);
+
 }

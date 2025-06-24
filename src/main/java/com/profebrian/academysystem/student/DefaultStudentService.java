@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("StudenService")
 public class DefaultStudentService implements StudentService {
 
     private final StudentMapper studentMapper;
@@ -29,7 +29,7 @@ public class DefaultStudentService implements StudentService {
     public StudentDto saveStudent(StudentDto studentDto) {
         Student student = studentMapper.toStudent(studentDto);
         var tutorId = studentDto.tutorId();
-        if (tutorId != null) student.setTutor(tutorMapper.toTutor(tutorService.findTutorById(tutorId)));
+        if (tutorId != null) student.setTutor(tutorMapper.tutorDtotoTutor(tutorService.findTutorById(tutorId)));
         return studentMapper.toStudentDto(studentRepository.save(student));
     }
 

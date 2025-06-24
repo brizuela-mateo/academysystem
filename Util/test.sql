@@ -11,4 +11,6 @@ from information_schema.COLUMNS
 where TABLE_SCHEMA = 'ACADEMY_SYSTEM_DB'
 and TABLE_NAME = 'students';
 
-drop table tutor;
+select * from teachers;
+
+drop table teachers;

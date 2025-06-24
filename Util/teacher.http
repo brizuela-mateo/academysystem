@@ -4,9 +4,9 @@ GET http://localhost:8080/teachers/1
 ###
 POST http://localhost:8080/teachers
 Content-Type: application/json
+
 {
-  "teacherId": 0,
-  "firstName": "brian",
+  "firstName": "cindy",
   "lastName": "cantero"
 }
 

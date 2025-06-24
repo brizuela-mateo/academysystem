@@ -1,6 +1,7 @@
 package com.profebrian.academysystem.teacher;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,10 +18,10 @@ public class TeacherService {
         this.teacherMapper = teacherMapper;
     }
 
+    @Transactional
     public TeacherDto saveTeacher(TeacherDto teacherDto) {
         Teacher teacher = teacherMapper.teacherDtoToTeacher(teacherDto);
-        teacherRepository.save(teacher);
-        return teacherDto;
+        return teacherMapper.teacherToTeacherDto(teacherRepository.save(teacher));
     }
 
     public List<TeacherDto> findAllTeachers() {

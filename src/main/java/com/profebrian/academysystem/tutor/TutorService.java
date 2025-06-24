@@ -13,4 +13,6 @@ public interface TutorService {
     public TutorDto findTutorById(Integer id);
 
     public void deleteTutorById(Integer id);
+
+    public TutorDto updateTutor(TutorDto tutorDto);
 }

@@ -11,12 +11,12 @@ public interface TutorMapper {
     TutorMapper INSTANCE = Mappers.getMapper(TutorMapper.class);
 
     @Mapping(source = "mainTutor.tutorId", target = "mainTutorId")
-    TutorDto toTutorDto(Tutor tutor);
+    TutorDto tutorToTutorDto(Tutor tutor);
 
-    Tutor toTutor(TutorDto tutorDto);
+    Tutor tutorDtotoTutor(TutorDto tutorDto);
 
-    List<TutorDto> toTutorDtoList(List<Tutor> tutors);
+    List<TutorDto> tutorsToTutorDtoList(List<Tutor> tutors);
 
-    List<Tutor> toTutorList(List<TutorDto> tutorDtos);
+    List<Tutor> tutorDtosToTutorList(List<TutorDto> tutorDtos);
 
 }

@@ -1,5 +1,6 @@
 package com.profebrian.academysystem.registration.exception;
 
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,6 +20,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<?> handleInvalidIdFormat() {
         return new ResponseEntity<>("Invalid Id format", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> handleResourceNotFound(ResourceNotFoundException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
 }

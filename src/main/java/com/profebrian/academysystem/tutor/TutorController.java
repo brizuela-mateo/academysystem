@@ -17,6 +17,11 @@ public class TutorController {
         this.tutorService = tutorService;
     }
 
+    @GetMapping("/{tutorId}")
+    public ResponseEntity<TutorDto> findById(@PathVariable Integer tutorId) {
+        return ResponseEntity.ok().body(tutorService.findTutorById(tutorId));
+    }
+
     @GetMapping
     public ResponseEntity<List<TutorDto>> getAllTutors() {
         return ResponseEntity.ok(tutorService.findAllTutors());
@@ -26,6 +31,12 @@ public class TutorController {
     public ResponseEntity<TutorDto> createTutor(@RequestBody @Valid TutorDto tutorDto) {
         TutorDto savedTutor = tutorService.saveTutor(tutorDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTutor);
+    }
+
+    @DeleteMapping("/{tutorId}")
+    public ResponseEntity<Void> deleteTutor(@PathVariable Integer tutorId) {
+        tutorService.deleteTutorById(tutorId);
+        return ResponseEntity.noContent().build();
     }
 
 }
