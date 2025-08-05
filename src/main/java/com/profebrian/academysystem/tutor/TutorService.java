@@ -21,8 +21,12 @@ public class TutorService {
     {
         var tutor = mapper.dtoToTutor(tutorDto);
         var mainTutorId = tutor.getMainTutorId();
-        if(mainTutorId != null)
-        {
+        if (tutor.getTutorId() == 0){
+            tutor.setTutorId(null);
+        }
+        if (mainTutorId == 0){
+            tutor.setTutorId(null);
+        } else {
             if (repository.existsById(mainTutorId)) {
                 throw new ResourceNotFoundException("Main tutor not found with ID: " + mainTutorId);
             }
@@ -36,7 +40,7 @@ public class TutorService {
     }
 
     public TutorDto findTutorById(Integer id) {
-        Tutor tutor = repository.findById(id)
+        var tutor = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tutor not found with id: " + id));
         return mapper.tutorToDto(tutor);
     }
