@@ -2,7 +2,7 @@ package com.profebrian.academysystem.tutor;
 
 public record TutorDto(Integer tutorId,
                        String fullName,
-                       Integer cellphoneNumber,
+                       Integer cellphone,
                        String email,
                        String ruc,
                        String rucOwner,

@@ -16,8 +16,8 @@ public class Tutor
     @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "cellphone_number")
-    private Integer cellphoneNumber;
+    @Column(name = "cellphone")
+    private Integer cellphone;
 
     private String email;
 
