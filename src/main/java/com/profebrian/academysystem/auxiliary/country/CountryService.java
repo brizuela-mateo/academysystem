@@ -25,7 +25,7 @@ public class CountryService {
         return repository.save(country);
     }
 
-    public List<Country> findAllTutors() {
+    public List<Country> findAllCountries() {
         return repository.findAll();
     }
 
