@@ -1,6 +1,5 @@
 package com.profebrian.academysystem.auxiliary.country;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,10 +13,10 @@ public class Country
     @Column(name = "country_id")
     private Integer countryId;
 
-    @Column(name = "country_name")
+    @Column(name = "name")
     private String countryName;
 
-    @Column(name = "country_code")
+    @Column(name = "code")
     private String countryCode;
 
 
