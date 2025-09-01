@@ -1,5 +1,6 @@
 package com.profebrian.academysystem.auxiliary.country;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import lombok.Data;
 

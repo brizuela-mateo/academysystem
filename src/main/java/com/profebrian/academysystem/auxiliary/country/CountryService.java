@@ -11,12 +11,17 @@ public class CountryService {
 
     private final CountryRepository repository;
 
-    public CountryService(CountryRepository countryRepository, TutorMapper tutorMapper) {
+    public CountryService(CountryRepository countryRepository) {
         this.repository = countryRepository;
     }
 
     public Country saveCountry(Country country)
     {
+        if (country.getCountryId() == 0){
+            country.setCountryId(null);
+        } else {
+            throw new IllegalArgumentException("Can't save a country when there is a country id");
+        }
         return repository.save(country);
     }
 
@@ -34,7 +39,11 @@ public class CountryService {
     }
 
     public Country updateCountry(Country country) {
-        return repository.save(country);
+        var countryId = country.getCountryId();
+        if (countryId != 0 && repository.existsById(countryId)) {
+            return repository.save(country);
+        } else {
+            throw new ResourceNotFoundException("Country not found with id: " + countryId);
+        }
     }
-
 }
