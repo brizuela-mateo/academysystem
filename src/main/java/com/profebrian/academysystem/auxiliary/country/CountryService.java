@@ -15,7 +15,7 @@ public class CountryService {
         this.repository = countryRepository;
     }
 
-    public Country saveCountry(Country country)
+    public Country createCountry(Country country)
     {
         if (country.getCountryId() == 0){
             country.setCountryId(null);
@@ -29,12 +29,12 @@ public class CountryService {
         return repository.findAll();
     }
 
-    public Country findCountryById(Integer id) {
+    public Country findCountry(Integer id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Country not found with id: " + id));
     }
 
-    public void deleteCountryById(Integer id) {
+    public void deleteCountry(Integer id) {
         repository.deleteById(id);
     }
 

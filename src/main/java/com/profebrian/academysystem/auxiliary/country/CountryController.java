@@ -18,8 +18,8 @@ public class CountryController {
     }
 
     @GetMapping("/{countryId}")
-    public ResponseEntity<Country> findCountryById(@PathVariable Integer countryId) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findCountryById(countryId));
+    public ResponseEntity<Country> getCountryById(@PathVariable Integer countryId) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findCountry(countryId));
     }
 
     @GetMapping
@@ -28,19 +28,19 @@ public class CountryController {
     }
 
     @PostMapping
-    public ResponseEntity<Country> createCountry(@RequestBody @Valid Country country) {
-        var savedCountry = service.saveCountry(country);
+    public ResponseEntity<Country> postCreateCountry(@RequestBody @Valid Country country) {
+        var savedCountry = service.createCountry(country);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCountry);
     }
 
     @DeleteMapping("/{countryId}")
-    public ResponseEntity<Void> deleteCountry(@PathVariable Integer countryId) {
-        service.deleteCountryById(countryId);
+    public ResponseEntity<Void> deleteCountryById(@PathVariable Integer countryId) {
+        service.deleteCountry(countryId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PatchMapping
-    ResponseEntity<Country> updateCountry(@RequestBody @Valid Country country) {
+    ResponseEntity<Country> patchUpdateCountry(@RequestBody @Valid Country country) {
         var updatedCountry = service.updateCountry(country);
         return ResponseEntity.status(HttpStatus.OK).body(updatedCountry);
     }
