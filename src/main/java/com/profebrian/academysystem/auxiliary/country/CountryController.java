@@ -24,7 +24,7 @@ public class CountryController {
 
     @GetMapping
     public ResponseEntity<List<Country>> getAllTutors() {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findAllTutors());
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllCountries());
     }
 
     @PostMapping
