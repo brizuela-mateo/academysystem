@@ -18,17 +18,17 @@ public class CountryController {
     }
 
     @GetMapping("/{countryId}")
-    public ResponseEntity<Country> findById(@PathVariable Integer countryId) {
+    public ResponseEntity<Country> findCountryById(@PathVariable Integer countryId) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findCountryById(countryId));
     }
 
     @GetMapping
-    public ResponseEntity<List<Country>> getAllTutors() {
+    public ResponseEntity<List<Country>> getAllCountries() {
         return ResponseEntity.status(HttpStatus.OK).body(service.findAllCountries());
     }
 
     @PostMapping
-    public ResponseEntity<Country> createTutor(@RequestBody @Valid Country country) {
+    public ResponseEntity<Country> createCountry(@RequestBody @Valid Country country) {
         var savedCountry = service.saveCountry(country);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCountry);
     }
