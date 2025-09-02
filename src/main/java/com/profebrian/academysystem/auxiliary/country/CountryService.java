@@ -11,37 +11,46 @@ public class CountryService {
 
     private final CountryRepository repository;
 
-    public CountryService(CountryRepository countryRepository) {
+    private final CountryMapper mapper;
+
+    public CountryService(CountryRepository countryRepository, CountryMapper mapper) {
         this.repository = countryRepository;
+        this.mapper = mapper;
     }
 
-    public Country createCountry(Country country)
+    public CountryDTO createCountry(CountryDTO countryDTO)
     {
+        Country country = mapper.toCountry(countryDTO);
         if (country.getCountryId() == 0){
             country.setCountryId(null);
         } else {
             throw new IllegalArgumentException("Can't save a country when there is a country id");
         }
-        return repository.save(country);
+        var createdCountry = repository.save(country);
+        return mapper.toCountryDTO(createdCountry);
     }
 
-    public List<Country> findAllCountries() {
-        return repository.findAll();
+    public List<CountryDTO> findAllCountries() {
+        var countries = repository.findAll();
+        return mapper.toCountryDTOList(countries);
     }
 
-    public Country findCountry(Integer id) {
-        return repository.findById(id)
+    public CountryDTO findCountry(Integer id) {
+        var foundCountry = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Country not found with id: " + id));
+        return mapper.toCountryDTO(foundCountry);
     }
 
     public void deleteCountry(Integer id) {
         repository.deleteById(id);
     }
 
-    public Country updateCountry(Country country) {
+    public CountryDTO updateCountry(CountryDTO countryDTO) {
+        var country = mapper.toCountry(countryDTO);
         var countryId = country.getCountryId();
         if (countryId != 0 && repository.existsById(countryId)) {
-            return repository.save(country);
+            var updatedCountry = repository.save(country);
+            return mapper.toCountryDTO(updatedCountry);
         } else {
             throw new ResourceNotFoundException("Country not found with id: " + countryId);
         }

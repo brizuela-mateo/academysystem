@@ -18,18 +18,18 @@ public class CountryController {
     }
 
     @GetMapping("/{countryId}")
-    public ResponseEntity<Country> getCountryById(@PathVariable Integer countryId) {
+    public ResponseEntity<CountryDTO> getCountryById(@PathVariable Integer countryId) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findCountry(countryId));
     }
 
     @GetMapping
-    public ResponseEntity<List<Country>> getAllCountries() {
+    public ResponseEntity<List<CountryDTO>> getAllCountries() {
         return ResponseEntity.status(HttpStatus.OK).body(service.findAllCountries());
     }
 
     @PostMapping
-    public ResponseEntity<Country> postCreateCountry(@RequestBody @Valid Country country) {
-        var savedCountry = service.createCountry(country);
+    public ResponseEntity<CountryDTO> postCreateCountry(@RequestBody @Valid CountryDTO countryDTO) {
+        var savedCountry = service.createCountry(countryDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCountry);
     }
 
@@ -40,8 +40,8 @@ public class CountryController {
     }
 
     @PatchMapping
-    ResponseEntity<Country> patchUpdateCountry(@RequestBody @Valid Country country) {
-        var updatedCountry = service.updateCountry(country);
+    ResponseEntity<CountryDTO> patchUpdateCountry(@RequestBody @Valid CountryDTO countryDTO) {
+        var updatedCountry = service.updateCountry(countryDTO);
         return ResponseEntity.status(HttpStatus.OK).body(updatedCountry);
     }
 }
