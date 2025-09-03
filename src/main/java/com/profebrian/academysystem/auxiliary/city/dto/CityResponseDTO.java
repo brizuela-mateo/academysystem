@@ -1,6 +1,12 @@
-package com.profebrian.academysystem.auxiliary.city.DTO;
+package com.profebrian.academysystem.auxiliary.city.dto;
 
-public record CityResponseDTO(Integer cityId,
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public record CityResponseDTO(@NotNull
+                              Integer cityId,
+                              @NotNull @Size(max = 100)
                               String cityName,
+                              @NotNull
                               Integer countryId) {
 }

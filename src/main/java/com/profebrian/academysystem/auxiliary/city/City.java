@@ -17,7 +17,7 @@ public class City
     @Column(name = "name")
     private String cityName;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "country_id")
     private Country country;
 

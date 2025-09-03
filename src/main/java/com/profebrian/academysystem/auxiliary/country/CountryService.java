@@ -55,4 +55,8 @@ public class CountryService {
             throw new ResourceNotFoundException("Country not found with id: " + countryId);
         }
     }
+
+    public Country findCountryEntity(Integer id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country not found with id: " + id));
+    }
 }
