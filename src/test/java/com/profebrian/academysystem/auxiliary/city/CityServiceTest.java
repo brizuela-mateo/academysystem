@@ -1,8 +1,8 @@
 package com.profebrian.academysystem.auxiliary.city;
 
 import com.profebrian.academysystem.auxiliary.city.dto.CityCreateDTO;
+import com.profebrian.academysystem.auxiliary.city.dto.CityResponseDTO;
 import com.profebrian.academysystem.auxiliary.country.Country;
-import com.profebrian.academysystem.auxiliary.country.CountryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,17 +12,18 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CityServiceTest {
 
     @InjectMocks
     private CityService service;
-    @Mock
-    private CountryService countryService;
     @Mock
     private CityRepository repository;
 
@@ -35,36 +36,63 @@ class CityServiceTest {
 
 
     @Test
-    void saveCity() {
+    void testSaveCity() {
+        System.out.println("testSaveCity");
         var cityCreateDTO = new CityCreateDTO("cityTest", 1);
-        var country = new Country();
-        country.setCountryId(1);
-        country.setCountryName("countryTest");
-        country.setCountryCode("CT");
-        when(countryService.findCountryEntity(cityCreateDTO.countryId()))
-                .thenReturn(country);
-        var city = new City();
-        city.setCityId(1);
-        city.setCityName("cityTest");
-        city.setCountry(country);
+        var city = createCity();
         when(repository.save(any(City.class))).thenReturn(city);
         var cityResponse = service.saveCity(cityCreateDTO);
         assertEquals(city.getCityId(),cityResponse.cityId());
     }
 
     @Test
-    void findAllCities() {
+    void testFindAllCities() {
+        System.out.println("testFindAllCities");
+        service.findAllCities();
+        var city = createCity();
+        when(repository.findAll()).thenReturn(List.of(city));
+        var cityResponseDTOSList = service.findAllCities();
+        assertEquals(cityResponseDTOSList.getFirst().cityId(), city.getCityId());
     }
 
     @Test
-    void findCity() {
+    void testFindCity() {
+        System.out.println("testFindCity");
+        var city = createCity();
+        when(repository.findById(city.getCityId())).thenReturn(Optional.of(city));
+        var cityResponseDTO = service.findCity(city.getCityId());
+        assertEquals(cityResponseDTO.cityId(), city.getCityId());
     }
 
     @Test
-    void deleteCity() {
+    void testDeleteCity() {
+        System.out.println("testDeleteCity");
+        service.deleteCity(1);
+        verify(repository, times(1)).deleteById(1);
     }
 
     @Test
-    void updateCity() {
+    void testUpdateCity() {
+        System.out.println("testUpdateCity");
+        var city = createCity();
+        var cityResponseDTO = new CityResponseDTO(1,"cityTest", 1);
+        when(repository.existsById(cityResponseDTO.cityId())).thenReturn(true);
+        service.updateCity(cityResponseDTO);
+        when(repository.save(any(City.class))).thenReturn(city);
+        var cityResponse = service.updateCity(cityResponseDTO);
+        assertEquals(city.getCityId(),cityResponse.cityId());
+    }
+
+    private City createCity(){
+        var country = new Country();
+        country.setCountryId(1);
+        country.setCountryName("countryTest");
+        country.setCountryCode("CT");
+
+        var city = new City();
+        city.setCityId(1);
+        city.setCityName("cityTest");
+        city.setCountry(country);
+        return city;
     }
 }
