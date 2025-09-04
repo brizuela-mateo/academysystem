@@ -44,14 +44,14 @@ public class CityService {
     }
 
     public CityResponseDTO findCity(Integer id) {
-        log.debug("[findCity] Starting with id: {}", id);
+        log.debug("[findCity] Starting with Id: {}", id);
         var foundCity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("City not found with id: " + id));
         return mapper.toResponseDTO(foundCity);
     }
 
     public void deleteCity(Integer id) {
-        log.debug("[deleteCity] Starting with id: {}", id);
+        log.debug("[deleteCity] Starting with Id: {}", id);
         repository.deleteById(id);
     }
 

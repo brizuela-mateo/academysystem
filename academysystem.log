@@ -4605,3 +4605,44 @@ java.lang.Throwable: Runtime.exit(130)
 2025-09-04T14:37:23.913-03:00 DEBUG 29514 --- [academysystem] [http-nio-8080-exec-2] c.p.a.auxiliary.country.CountryService   : [saveCountry] Starting with: CountrySaveDTO[countryName=Uruguay, countryCode=UR]
 2025-09-04T14:37:38.679-03:00 DEBUG 29514 --- [academysystem] [http-nio-8080-exec-3] c.p.a.auxiliary.country.CountryService   : [findCountry] Starting with id: 1: 
 2025-09-04T14:41:10.121-03:00  INFO 29514 --- [academysystem] [http-nio-8080-exec-6] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 1029 ms
+2025-09-04T14:54:53.375-03:00  INFO 29514 --- [academysystem] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-04T14:54:53.386-03:00  INFO 29514 --- [academysystem] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-04T14:54:53.399-03:00  INFO 29514 --- [academysystem] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-04T14:54:53.410-03:00  INFO 29514 --- [academysystem] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-04T14:54:53.440-03:00  INFO 29514 --- [academysystem] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-04T14:54:56.750-03:00  INFO 32012 --- [academysystem] [main] c.p.a.AcademysystemApplication           : Starting AcademysystemApplication using Java 24.0.1 with PID 32012 (/home/mateob/IdeaProjects/ProyectosPropios/academysystem/target/classes started by mateob in /home/mateob/IdeaProjects/ProyectosPropios/academysystem)
+2025-09-04T14:54:56.752-03:00 DEBUG 32012 --- [academysystem] [main] c.p.a.AcademysystemApplication           : Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-09-04T14:54:56.753-03:00  INFO 32012 --- [academysystem] [main] c.p.a.AcademysystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-09-04T14:54:57.424-03:00  INFO 32012 --- [academysystem] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-04T14:54:57.477-03:00  INFO 32012 --- [academysystem] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 5 JPA repository interfaces.
+2025-09-04T14:54:57.801-03:00  INFO 32012 --- [academysystem] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-04T14:54:57.810-03:00  INFO 32012 --- [academysystem] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-04T14:54:57.810-03:00  INFO 32012 --- [academysystem] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-09-04T14:54:57.848-03:00  INFO 32012 --- [academysystem] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-04T14:54:57.849-03:00  INFO 32012 --- [academysystem] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1051 ms
+2025-09-04T14:54:57.947-03:00  INFO 32012 --- [academysystem] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-04T14:54:57.982-03:00  INFO 32012 --- [academysystem] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-09-04T14:54:58.007-03:00  INFO 32012 --- [academysystem] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-04T14:54:58.194-03:00  INFO 32012 --- [academysystem] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-04T14:54:58.221-03:00  INFO 32012 --- [academysystem] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-04T14:54:58.532-03:00  INFO 32012 --- [academysystem] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4449a60b
+2025-09-04T14:54:58.534-03:00  INFO 32012 --- [academysystem] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-04T14:54:58.591-03:00  INFO 32012 --- [academysystem] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.42
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-04T14:54:59.237-03:00  INFO 32012 --- [academysystem] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-04T14:54:59.291-03:00  INFO 32012 --- [academysystem] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-04T14:55:00.126-03:00  INFO 32012 --- [academysystem] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-04T14:55:00.132-03:00  INFO 32012 --- [academysystem] [main] c.p.a.AcademysystemApplication           : Started AcademysystemApplication in 3.791 seconds (process running for 4.329)
+2025-09-04T14:55:10.867-03:00  INFO 32012 --- [academysystem] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-04T14:55:10.867-03:00  INFO 32012 --- [academysystem] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-04T14:55:10.868-03:00  INFO 32012 --- [academysystem] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-09-04T14:55:10.888-03:00 DEBUG 32012 --- [academysystem] [http-nio-8080-exec-1] c.p.a.auxiliary.city.CityController      : [getAllCities] Starting: 
+2025-09-04T14:55:10.891-03:00 DEBUG 32012 --- [academysystem] [http-nio-8080-exec-1] c.p.a.auxiliary.city.CityService         : [findAllCities] Starting: 
+2025-09-04T14:55:28.850-03:00 DEBUG 32012 --- [academysystem] [http-nio-8080-exec-2] c.p.a.auxiliary.city.CityController      : [getCityById] Starting with Id: 1
+2025-09-04T14:55:28.850-03:00 DEBUG 32012 --- [academysystem] [http-nio-8080-exec-2] c.p.a.auxiliary.city.CityService         : [findCity] Starting with id: 1
