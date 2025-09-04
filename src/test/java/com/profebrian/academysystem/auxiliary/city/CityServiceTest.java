@@ -1,6 +1,7 @@
 package com.profebrian.academysystem.auxiliary.city;
 
 import com.profebrian.academysystem.auxiliary.city.dto.CityCreateDTO;
+import com.profebrian.academysystem.auxiliary.city.dto.CityRequestDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityResponseDTO;
 import com.profebrian.academysystem.auxiliary.country.Country;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,12 +76,11 @@ class CityServiceTest {
     void testUpdateCity() {
         System.out.println("testUpdateCity");
         var city = createCity();
-        var cityResponseDTO = new CityResponseDTO(1,"cityTest", 1);
-        when(repository.existsById(cityResponseDTO.cityId())).thenReturn(true);
-        service.updateCity(cityResponseDTO);
+        var cityRequestDTO = new CityRequestDTO(1,"cityTest", 1);
+        when(repository.existsById(cityRequestDTO.cityId())).thenReturn(true);
         when(repository.save(any(City.class))).thenReturn(city);
-        var cityResponse = service.updateCity(cityResponseDTO);
-        assertEquals(city.getCityId(),cityResponse.cityId());
+        var cityResponseDTO = service.updateCity(cityRequestDTO);
+        assertEquals(city.getCityId(),cityResponseDTO.cityId());
     }
 
     private City createCity(){

@@ -1,6 +1,7 @@
 package com.profebrian.academysystem.auxiliary.city;
 
 import com.profebrian.academysystem.auxiliary.city.dto.CityCreateDTO;
+import com.profebrian.academysystem.auxiliary.city.dto.CityRequestDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -36,14 +37,14 @@ public class CityController {
     }
 
     @DeleteMapping("/{cityId}")
-    public ResponseEntity<Void> deleteCountry(@PathVariable Integer cityId) {
+    public ResponseEntity<Void> deleteCity(@PathVariable Integer cityId) {
         service.deleteCity(cityId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PatchMapping
-    ResponseEntity<CityResponseDTO> updateCountry(@RequestBody @Valid CityResponseDTO countryDTO) {
-        var updatedCountry = service.updateCity(countryDTO);
+    ResponseEntity<CityResponseDTO> updateCity(@RequestBody @Valid CityRequestDTO cityRequestDTO) {
+        var updatedCountry = service.updateCity(cityRequestDTO);
         return ResponseEntity.status(HttpStatus.OK).body(updatedCountry);
     }
 }

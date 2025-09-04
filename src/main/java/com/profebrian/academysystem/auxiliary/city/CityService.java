@@ -1,6 +1,7 @@
 package com.profebrian.academysystem.auxiliary.city;
 
 import com.profebrian.academysystem.auxiliary.city.dto.CityCreateDTO;
+import com.profebrian.academysystem.auxiliary.city.dto.CityRequestDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityResponseDTO;
 import com.profebrian.academysystem.auxiliary.country.Country;
 import com.profebrian.academysystem.auxiliary.country.CountryService;
@@ -33,20 +34,20 @@ public class CityService {
         Country country = countryService.findCountryEntity(cityCreateDTO.countryId());
         city.setCountry(country);
         var savedCity = repository.save(city);
-        return mapper.toDTO(savedCity);
+        return mapper.toResponseDTO(savedCity);
     }
 
     public List<CityResponseDTO> findAllCities() {
         log.info("[findAllCities] Starting:");
         var cities = repository.findAll();
-        return mapper.toDTOList(cities);
+        return mapper.toResponseDTO(cities);
     }
 
     public CityResponseDTO findCity(Integer id) {
         log.info("[findCity] Starting with id: {}", id);
         var foundCity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("City not found with id: " + id));
-        return mapper.toDTO(foundCity);
+        return mapper.toResponseDTO(foundCity);
     }
 
     public void deleteCity(Integer id) {
@@ -54,13 +55,13 @@ public class CityService {
         repository.deleteById(id);
     }
 
-    public CityResponseDTO updateCity(CityResponseDTO cityResponseDTO) {
-        log.info("[updateCity] Starting with cityResponseDTO: {}: ", cityResponseDTO);
-        var city = mapper.toEntity(cityResponseDTO);
+    public CityResponseDTO updateCity(CityRequestDTO cityRequestDTO) {
+        log.info("[updateCity] Starting with: {}: ", cityRequestDTO);
+        var city = mapper.toUpdateEntity(cityRequestDTO);
         var cityId = city.getCityId();
         if (repository.existsById(cityId)) {
             var updatedCity = repository.save(city);
-            return mapper.toDTO(updatedCity);
+            return mapper.toResponseDTO(updatedCity);
         } else {
             throw new ResourceNotFoundException("City not found with id: " + cityId);
         }

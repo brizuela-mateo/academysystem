@@ -1,6 +1,7 @@
 package com.profebrian.academysystem.auxiliary.city;
 
 import com.profebrian.academysystem.auxiliary.city.dto.CityCreateDTO;
+import com.profebrian.academysystem.auxiliary.city.dto.CityRequestDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,12 +13,12 @@ import java.util.List;
 public interface CityMapper {
     CityMapper INSTANCE = Mappers.getMapper(CityMapper.class);
 
-    City toEntity(CityResponseDTO cityResponseDTO);
-
     @Mapping(source = "country.countryId", target = "countryId")
-    CityResponseDTO toDTO(City city);
+    CityResponseDTO toResponseDTO(City city);
 
-    List<CityResponseDTO> toDTOList(List<City> cities);
+    List<CityResponseDTO> toResponseDTO(List<City> cities);
 
     City toSaveEntity(CityCreateDTO cityCreateDTO);
+
+    City toUpdateEntity(CityRequestDTO cityRequestDTO);
 }
