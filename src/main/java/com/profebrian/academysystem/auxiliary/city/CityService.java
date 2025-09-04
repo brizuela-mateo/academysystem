@@ -57,9 +57,11 @@ public class CityService {
 
     public CityResponseDTO updateCity(CityRequestDTO cityRequestDTO) {
         log.info("[updateCity] Starting with: {}: ", cityRequestDTO);
+        Country country = countryService.findCountryEntity(cityRequestDTO.countryId());
         var city = mapper.toUpdateEntity(cityRequestDTO);
         var cityId = city.getCityId();
         if (repository.existsById(cityId)) {
+            city.setCountry(country);
             var updatedCity = repository.save(city);
             return mapper.toResponseDTO(updatedCity);
         } else {
