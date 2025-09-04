@@ -1,6 +1,6 @@
 package com.profebrian.academysystem.auxiliary.city;
 
-import com.profebrian.academysystem.auxiliary.city.dto.CityCreateDTO;
+import com.profebrian.academysystem.auxiliary.city.dto.CitySaveDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityRequestDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityResponseDTO;
 import jakarta.validation.Valid;
@@ -31,8 +31,8 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<CityResponseDTO> postCreateCity(@RequestBody @Valid CityCreateDTO cityCreateDTO) {
-        var createdCountry = service.saveCity(cityCreateDTO);
+    public ResponseEntity<CityResponseDTO> postCreateCity(@RequestBody @Valid CitySaveDTO citySaveDTO) {
+        var createdCountry = service.saveCity(citySaveDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCountry);
     }
 

@@ -1,5 +1,10 @@
 package com.profebrian.academysystem.auxiliary.country;
 
+import com.profebrian.academysystem.auxiliary.country.dto.CountryResponseDTO;
+import com.profebrian.academysystem.auxiliary.country.dto.CountryRequestDTO;
+import com.profebrian.academysystem.auxiliary.country.dto.CountrySaveDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +14,9 @@ import java.util.List;
 @Service
 public class CountryService {
 
-    private final CountryRepository repository;
+    private static final Logger log = LoggerFactory.getLogger(CountryService.class);
 
+    private final CountryRepository repository;
     private final CountryMapper mapper;
 
     public CountryService(CountryRepository countryRepository, CountryMapper mapper) {
@@ -18,37 +24,36 @@ public class CountryService {
         this.mapper = mapper;
     }
 
-    public CountryDTO createCountry(CountryDTO countryDTO)
-    {
-        Country country = mapper.toCountry(countryDTO);
-        if (country.getCountryId() == 0){
-            country.setCountryId(null);
-        } else {
-            throw new IllegalArgumentException("Can't save a country when there is a country id");
-        }
-        var createdCountry = repository.save(country);
-        return mapper.toCountryDTO(createdCountry);
+    public CountryResponseDTO saveCountry(CountrySaveDTO countrySaveDTO) {
+        log.debug("[saveCountry] Starting with: {}", countrySaveDTO);
+        Country country = mapper.toSaveEntity(countrySaveDTO);
+        var savedCountry = repository.save(country);
+        return mapper.toCountryDTO(savedCountry);
     }
 
-    public List<CountryDTO> findAllCountries() {
+    public List<CountryResponseDTO> findAllCountries() {
+        log.debug("[findAllCountries] Starting: ");
         var countries = repository.findAll();
         return mapper.toCountryDTOList(countries);
     }
 
-    public CountryDTO findCountry(Integer id) {
+    public CountryResponseDTO findCountry(Integer id) {
+        log.debug("[findCountry] Starting with id: {}: ", id);
         var foundCountry = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Country not found with id: " + id));
         return mapper.toCountryDTO(foundCountry);
     }
 
     public void deleteCountry(Integer id) {
+        log.debug("[deleteCountry] Starting with id: {}: ", id);
         repository.deleteById(id);
     }
 
-    public CountryDTO updateCountry(CountryDTO countryDTO) {
-        var country = mapper.toCountry(countryDTO);
+    public CountryResponseDTO updateCountry(CountryRequestDTO countryRequestDTO) {
+        log.debug("[updateCountry] Starting with: {}: ", countryRequestDTO);
+        var country = mapper.toUpdateEntity(countryRequestDTO);
         var countryId = country.getCountryId();
-        if (countryId != 0 && repository.existsById(countryId)) {
+        if (repository.existsById(countryId)) {
             var updatedCountry = repository.save(country);
             return mapper.toCountryDTO(updatedCountry);
         } else {
@@ -57,6 +62,7 @@ public class CountryService {
     }
 
     public Country findCountryEntity(Integer id) {
+        log.debug("[findCountryEntity] Starting with: {}: ", id);
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country not found with id: " + id));
     }
 }

@@ -1,6 +1,6 @@
 package com.profebrian.academysystem.auxiliary.city;
 
-import com.profebrian.academysystem.auxiliary.city.dto.CityCreateDTO;
+import com.profebrian.academysystem.auxiliary.city.dto.CitySaveDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityRequestDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityResponseDTO;
 import com.profebrian.academysystem.auxiliary.country.Country;
@@ -17,6 +17,7 @@ import java.util.List;
 public class CityService {
 
     private static final Logger log = LoggerFactory.getLogger(CityService.class);
+
     private final CityRepository repository;
     private final CityMapper mapper;
     private final CountryService countryService;
@@ -27,18 +28,17 @@ public class CityService {
         this.countryService = countryService;
     }
 
-    public CityResponseDTO saveCity(CityCreateDTO cityCreateDTO)
-    {
-        log.info("[saveCity] Starting with cityCreateDTO: {}", cityCreateDTO);
-        var city = mapper.toSaveEntity(cityCreateDTO);
-        Country country = countryService.findCountryEntity(cityCreateDTO.countryId());
+    public CityResponseDTO saveCity(CitySaveDTO citySaveDTO) {
+        log.info("[saveCity] Starting with: {}", citySaveDTO);
+        var city = mapper.toSaveEntity(citySaveDTO);
+        Country country = countryService.findCountryEntity(citySaveDTO.countryId());
         city.setCountry(country);
         var savedCity = repository.save(city);
         return mapper.toResponseDTO(savedCity);
     }
 
     public List<CityResponseDTO> findAllCities() {
-        log.info("[findAllCities] Starting:");
+        log.info("[findAllCities] Starting: ");
         var cities = repository.findAll();
         return mapper.toResponseDTO(cities);
     }
@@ -51,7 +51,7 @@ public class CityService {
     }
 
     public void deleteCity(Integer id) {
-        log.info("[deleteCity] Starting: ");
+        log.info("[deleteCity] Starting with id: {}", id);
         repository.deleteById(id);
     }
 

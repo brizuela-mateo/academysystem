@@ -1,6 +1,6 @@
 package com.profebrian.academysystem.auxiliary.city;
 
-import com.profebrian.academysystem.auxiliary.city.dto.CityCreateDTO;
+import com.profebrian.academysystem.auxiliary.city.dto.CitySaveDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityRequestDTO;
 import com.profebrian.academysystem.auxiliary.city.dto.CityResponseDTO;
 import org.mapstruct.Mapper;
@@ -18,7 +18,7 @@ public interface CityMapper {
 
     List<CityResponseDTO> toResponseDTO(List<City> cities);
 
-    City toSaveEntity(CityCreateDTO cityCreateDTO);
+    City toSaveEntity(CitySaveDTO citySaveDTO);
 
     City toUpdateEntity(CityRequestDTO cityRequestDTO);
 }
