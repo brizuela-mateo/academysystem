@@ -29,7 +29,7 @@ public class CityService {
     }
 
     public CityResponseDTO saveCity(CitySaveDTO citySaveDTO) {
-        log.info("[saveCity] Starting with: {}", citySaveDTO);
+        log.debug("[saveCity] Starting with: {}", citySaveDTO);
         var city = mapper.toSaveEntity(citySaveDTO);
         Country country = countryService.findCountryEntity(citySaveDTO.countryId());
         city.setCountry(country);
@@ -38,25 +38,25 @@ public class CityService {
     }
 
     public List<CityResponseDTO> findAllCities() {
-        log.info("[findAllCities] Starting: ");
+        log.debug("[findAllCities] Starting: ");
         var cities = repository.findAll();
         return mapper.toResponseDTO(cities);
     }
 
     public CityResponseDTO findCity(Integer id) {
-        log.info("[findCity] Starting with id: {}", id);
+        log.debug("[findCity] Starting with id: {}", id);
         var foundCity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("City not found with id: " + id));
         return mapper.toResponseDTO(foundCity);
     }
 
     public void deleteCity(Integer id) {
-        log.info("[deleteCity] Starting with id: {}", id);
+        log.debug("[deleteCity] Starting with id: {}", id);
         repository.deleteById(id);
     }
 
     public CityResponseDTO updateCity(CityRequestDTO cityRequestDTO) {
-        log.info("[updateCity] Starting with: {}: ", cityRequestDTO);
+        log.debug("[updateCity] Starting with: {}: ", cityRequestDTO);
         Country country = countryService.findCountryEntity(cityRequestDTO.countryId());
         var city = mapper.toUpdateEntity(cityRequestDTO);
         var cityId = city.getCityId();
