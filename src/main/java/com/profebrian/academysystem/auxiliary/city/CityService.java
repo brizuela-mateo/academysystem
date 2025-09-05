@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class CityService {
         this.countryService = countryService;
     }
 
+    @Transactional
     public CityResponseDTO saveCity(CitySaveDTO citySaveDTO) {
         log.debug("[saveCity] Starting with: {}", citySaveDTO);
         var city = mapper.toSaveEntity(citySaveDTO);
@@ -50,11 +52,13 @@ public class CityService {
         return mapper.toResponseDTO(foundCity);
     }
 
+    @Transactional
     public void deleteCity(Integer id) {
         log.debug("[deleteCity] Starting with Id: {}", id);
         repository.deleteById(id);
     }
 
+    @Transactional
     public CityResponseDTO updateCity(CityRequestDTO cityRequestDTO) {
         log.debug("[updateCity] Starting with: {}: ", cityRequestDTO);
         Country country = countryService.findCountryEntity(cityRequestDTO.countryId());
