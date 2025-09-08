@@ -12,8 +12,6 @@ import java.util.List;
 public interface CountryMapper {
     CountryMapper INSTANCE = Mappers.getMapper(CountryMapper.class);
 
-    Country toCountry(CountryResponseDTO countryResponseDTO);
-
     CountryResponseDTO toCountryDTO(Country country);
 
     List<CountryResponseDTO> toCountryDTOList(List<Country> countries);
