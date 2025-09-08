@@ -1,5 +1,8 @@
 package com.profebrian.academysystem.teacher;
 
+import com.profebrian.academysystem.teacher.dto.TeacherRequestDTO;
+import com.profebrian.academysystem.teacher.dto.TeacherResponseDTO;
+import com.profebrian.academysystem.teacher.dto.TeacherSaveDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -9,9 +12,11 @@ import java.util.List;
 public interface TeacherMapper {
     TeacherMapper INSTANCE = Mappers.getMapper(TeacherMapper.class);
 
-    Teacher teacherDtoToTeacher(TeacherDto teacherDto);
+    Teacher toSaveEntity(TeacherSaveDTO teacherSaveDTO);
 
-    TeacherDto teacherToTeacherDto(Teacher teacher);
+    TeacherResponseDTO toResponseDTO(Teacher teacher);
 
-    List<TeacherDto> teacherToTeacherDtoList(List<Teacher> teachers);
+    List<TeacherResponseDTO> toResponseListDTO(List<Teacher> teachers);
+
+    Teacher toUpdateEntity(TeacherRequestDTO teacherRequestDTO);
 }
