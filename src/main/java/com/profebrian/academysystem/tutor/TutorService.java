@@ -1,5 +1,10 @@
 package com.profebrian.academysystem.tutor;
 
+import com.profebrian.academysystem.tutor.dto.TutorRequestDTO;
+import com.profebrian.academysystem.tutor.dto.TutorResponseDTO;
+import com.profebrian.academysystem.tutor.dto.TutorSaveDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import java.util.List;
@@ -8,48 +13,65 @@ import java.util.List;
 @Service
 public class TutorService {
 
+    private static final Logger log = LoggerFactory.getLogger(TutorService.class);
+
     private final TutorRepository repository;
 
     private final TutorMapper mapper;
 
-    public TutorService(TutorRepository tutorRepository, TutorMapper tutorMapper) {
-        this.repository = tutorRepository;
-        this.mapper = tutorMapper;
+    public TutorService(TutorRepository repository, TutorMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
     }
 
-    public TutorDto saveTutor(TutorDto tutorDto)
+    public TutorResponseDTO saveTutor(TutorSaveDTO tutorSaveDTO)
     {
-        var tutor = mapper.dtoToTutor(tutorDto);
-        var mainTutorId = tutor.getMainTutorId();
-        if (tutor.getTutorId() == 0){
-            tutor.setTutorId(null);
-        }
-        if (mainTutorId == 0){
-            tutor.setTutorId(null);
-        } else {
-            if (repository.existsById(mainTutorId)) {
-                throw new ResourceNotFoundException("Main tutor not found with ID: " + mainTutorId);
-            }
+        log.debug("[saveTutor] Starting with: {}", tutorSaveDTO);
+        var tutor = mapper.toSaveEntity(tutorSaveDTO);
+        var mainTutorId = tutorSaveDTO.mainTutorId();
+        if (mainTutorId != 0){
+            tutor.setMainTutor(findTutorEntity(mainTutorId));
         }
         var savedTutor = repository.save(tutor);
-        return mapper.tutorToDto(savedTutor);
+        return mapper.toResponseDTO(savedTutor);
     }
 
-    public List<TutorDto> findAllTutors() {
-        return  mapper.tutorsToDtoList(repository.findAll());
+    public List<TutorResponseDTO> findAllTutors() {
+        log.debug("[findAllTutors] Starting: ");
+        return mapper.toResponseDTO(repository.findAll());
     }
 
-    public TutorDto findTutorById(Integer id) {
+    public TutorResponseDTO findTutor(Integer id) {
+        log.debug("[findTutor] Starting with id: {}", id);
         var tutor = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tutor not found with id: " + id));
-        return mapper.tutorToDto(tutor);
+        return mapper.toResponseDTO(tutor);
     }
 
-    public void deleteTutorById(Integer id) {
+    public void deleteTutor(Integer id) {
+        log.debug("[deleteTutor] Starting with id: {}", id);
         repository.deleteById(id);
     }
 
-    public TutorDto updateTutor(TutorDto tutorDto) {
-        return null;
+    public TutorResponseDTO updateTutor(TutorRequestDTO tutorRequestDTO) {
+        log.debug("[updateTutor] Starting with: {}", tutorRequestDTO);
+        var tutorId = tutorRequestDTO.tutorId();
+        if (repository.existsById(tutorId)){
+            var tutor = mapper.toUpdateEntity(tutorRequestDTO);
+            var mainTutorId = tutorRequestDTO.mainTutorId();
+            if (mainTutorId != 0){
+                tutor.setMainTutor(findTutorEntity(mainTutorId));
+            }
+            var savedTutor = repository.save(tutor);
+            return mapper.toResponseDTO(savedTutor);
+        } else {
+            throw new ResourceNotFoundException("Tutor not found with id: " + tutorId);
+        }
+    }
+
+    private Tutor findTutorEntity(Integer id) {
+        log.debug("[findTutorEntity] Starting with id: {}", id);
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Tutor not found with id: " + id));
     }
 }

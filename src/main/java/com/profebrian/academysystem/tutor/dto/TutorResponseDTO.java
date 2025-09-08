@@ -1,10 +1,15 @@
-package com.profebrian.academysystem.tutor;
+package com.profebrian.academysystem.tutor.dto;
 
-public record TutorDto(Integer tutorId,
-                       String fullName,
-                       Integer cellphone,
-                       String email,
-                       String ruc,
-                       String rucOwner,
-                       Integer mainTutorId) {
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public record TutorResponseDTO(@NotNull
+                               Integer tutorId,
+                               @NotNull @Size(max = 100)
+                               String fullName,
+                               @Size(max = 20)
+                               String cellphone,
+                               @Size(max = 320)
+                               String email,
+                               Integer mainTutorId) {
 }

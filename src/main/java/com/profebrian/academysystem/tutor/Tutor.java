@@ -17,16 +17,12 @@ public class Tutor
     private String fullName;
 
     @Column(name = "cellphone")
-    private Integer cellphone;
+    private String cellphone;
 
     private String email;
 
-    private String ruc;
-
-    @Column(name = "ruc_owner")
-    private String rucOwner;
-
-    @Column(name = "main_tutor_id")
-    private Integer mainTutorId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "main_tutor_id")
+    private Tutor mainTutor;
 
 }

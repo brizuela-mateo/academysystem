@@ -1,6 +1,11 @@
 package com.profebrian.academysystem.tutor;
 
+import com.profebrian.academysystem.tutor.dto.TutorRequestDTO;
+import com.profebrian.academysystem.tutor.dto.TutorResponseDTO;
+import com.profebrian.academysystem.tutor.dto.TutorSaveDTO;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +16,8 @@ import java.util.List;
 @RequestMapping("/tutors")
 public class TutorController {
 
+    private static final Logger log = LoggerFactory.getLogger(TutorService.class);
+
     private final TutorService tutorService;
 
     public TutorController(TutorService tutorService) {
@@ -18,25 +25,36 @@ public class TutorController {
     }
 
     @GetMapping("/{tutorId}")
-    public ResponseEntity<TutorDto> findById(@PathVariable Integer tutorId) {
-        return ResponseEntity.ok().body(tutorService.findTutorById(tutorId));
+    public ResponseEntity<TutorResponseDTO> getTutorById(@PathVariable Integer tutorId) {
+        log.debug("[getTutorById]: Starting with id: {}", tutorId);
+        return ResponseEntity.status(HttpStatus.OK).body(tutorService.findTutor(tutorId));
     }
 
     @GetMapping
-    public ResponseEntity<List<TutorDto>> getAllTutors() {
-        return ResponseEntity.ok(tutorService.findAllTutors());
+    public ResponseEntity<List<TutorResponseDTO>> getAllTutors() {
+        log.debug("[getAllTutors]: Starting:");
+        return ResponseEntity.status(HttpStatus.OK).body(tutorService.findAllTutors());
     }
 
     @PostMapping
-    public ResponseEntity<TutorDto> createTutor(@RequestBody @Valid TutorDto tutorDto) {
-        TutorDto savedTutor = tutorService.saveTutor(tutorDto);
+    public ResponseEntity<TutorResponseDTO> postCreateTutor(@RequestBody @Valid TutorSaveDTO tutorSaveDTO) {
+        log.debug("[postCreateTutor]: Starting with: {}", tutorSaveDTO);
+        TutorResponseDTO savedTutor = tutorService.saveTutor(tutorSaveDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTutor);
     }
 
     @DeleteMapping("/{tutorId}")
     public ResponseEntity<Void> deleteTutor(@PathVariable Integer tutorId) {
-        tutorService.deleteTutorById(tutorId);
-        return ResponseEntity.noContent().build();
+        log.debug("[deleteTutor]: Starting with id: {}", tutorId);
+        tutorService.deleteTutor(tutorId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PatchMapping
+    public ResponseEntity<TutorResponseDTO> patchUpdateTutor(@RequestBody @Valid TutorRequestDTO tutorRequestDTO) {
+        log.debug("[patchUpdateTutor]: Starting with: {}", tutorRequestDTO);
+        var updatedTutor = tutorService.updateTutor(tutorRequestDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedTutor);
     }
 
 }
