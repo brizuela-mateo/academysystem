@@ -18,42 +18,42 @@ public class TutorController {
 
     private static final Logger log = LoggerFactory.getLogger(TutorService.class);
 
-    private final TutorService tutorService;
+    private final TutorService service;
 
-    public TutorController(TutorService tutorService) {
-        this.tutorService = tutorService;
+    public TutorController(TutorService service) {
+        this.service = service;
     }
 
     @GetMapping("/{tutorId}")
     public ResponseEntity<TutorResponseDTO> getTutorById(@PathVariable Integer tutorId) {
         log.debug("[getTutorById]: Starting with id: {}", tutorId);
-        return ResponseEntity.status(HttpStatus.OK).body(tutorService.findTutor(tutorId));
+        return ResponseEntity.status(HttpStatus.OK).body(service.findTutor(tutorId));
     }
 
     @GetMapping
     public ResponseEntity<List<TutorResponseDTO>> getAllTutors() {
         log.debug("[getAllTutors]: Starting:");
-        return ResponseEntity.status(HttpStatus.OK).body(tutorService.findAllTutors());
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllTutors());
     }
 
     @PostMapping
     public ResponseEntity<TutorResponseDTO> postCreateTutor(@RequestBody @Valid TutorSaveDTO tutorSaveDTO) {
         log.debug("[postCreateTutor]: Starting with: {}", tutorSaveDTO);
-        TutorResponseDTO savedTutor = tutorService.saveTutor(tutorSaveDTO);
+        TutorResponseDTO savedTutor = service.saveTutor(tutorSaveDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTutor);
     }
 
     @DeleteMapping("/{tutorId}")
     public ResponseEntity<Void> deleteTutor(@PathVariable Integer tutorId) {
         log.debug("[deleteTutor]: Starting with id: {}", tutorId);
-        tutorService.deleteTutor(tutorId);
+        service.deleteTutor(tutorId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PatchMapping
     public ResponseEntity<TutorResponseDTO> patchUpdateTutor(@RequestBody @Valid TutorRequestDTO tutorRequestDTO) {
         log.debug("[patchUpdateTutor]: Starting with: {}", tutorRequestDTO);
-        var updatedTutor = tutorService.updateTutor(tutorRequestDTO);
+        var updatedTutor = service.updateTutor(tutorRequestDTO);
         return ResponseEntity.status(HttpStatus.OK).body(updatedTutor);
     }
 

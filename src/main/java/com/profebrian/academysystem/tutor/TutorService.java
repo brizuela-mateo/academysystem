@@ -16,7 +16,6 @@ public class TutorService {
     private static final Logger log = LoggerFactory.getLogger(TutorService.class);
 
     private final TutorRepository repository;
-
     private final TutorMapper mapper;
 
     public TutorService(TutorRepository repository, TutorMapper mapper) {
@@ -24,8 +23,7 @@ public class TutorService {
         this.mapper = mapper;
     }
 
-    public TutorResponseDTO saveTutor(TutorSaveDTO tutorSaveDTO)
-    {
+    public TutorResponseDTO saveTutor(TutorSaveDTO tutorSaveDTO) {
         log.debug("[saveTutor] Starting with: {}", tutorSaveDTO);
         var tutor = mapper.toSaveEntity(tutorSaveDTO);
         var mainTutorId = tutorSaveDTO.mainTutorId();
