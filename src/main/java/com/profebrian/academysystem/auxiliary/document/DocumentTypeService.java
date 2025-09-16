@@ -28,22 +28,22 @@ public class DocumentTypeService {
     @Transactional
     public DocumentTypeResponseDTO saveDocumentType(DocumentTypeSaveDTO documentTypeSaveDTO) {
         log.debug("[saveDocumentType] Starting with: {}", documentTypeSaveDTO);
-        DocumentType documentType = mapper.toDocumentTypeEntity(documentTypeSaveDTO);
+        DocumentType documentType = mapper.toSaveEntity(documentTypeSaveDTO);
         var savedCountry = repository.save(documentType);
-        return mapper.toDocumentTypeDTO(savedCountry);
+        return mapper.toResponseDTO(savedCountry);
     }
 
     public List<DocumentTypeResponseDTO> findAllDocumentTypes() {
         log.debug("[findAllDocumentTypes] Starting: ");
         var countries = repository.findAll();
-        return mapper.toDocumentTypeDTOList(countries);
+        return mapper.toDTOList(countries);
     }
 
     public DocumentTypeResponseDTO findDocumentyType(Integer id) {
         log.debug("[findDocumentyType] Starting with id: {}: ", id);
         var foundDocumentType = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Country not found with id: " + id));
-        return mapper.toDocumentTypeDTO(foundDocumentType);
+        return mapper.toResponseDTO(foundDocumentType);
     }
 
     @Transactional
@@ -55,11 +55,11 @@ public class DocumentTypeService {
     @Transactional
     public DocumentTypeResponseDTO updateDocumentType(DocumentTypeRequestDTO documentTypeRequestDTO) {
         log.debug("[updateDocumentType] Starting with: {}: ", documentTypeRequestDTO);
-        var documentType = mapper.toDocumentTypeEntity(documentTypeRequestDTO);
+        var documentType = mapper.toUpdateEntity(documentTypeRequestDTO);
         var documentTypeId = documentType.getDocumentTypeId();
         if (repository.existsById(documentTypeId)) {
             var updatedDocumentType = repository.save(documentType);
-            return mapper.toDocumentTypeDTO(updatedDocumentType);
+            return mapper.toResponseDTO(updatedDocumentType);
         } else {
             throw new ResourceNotFoundException("Country not found with id: " + documentTypeId);
         }

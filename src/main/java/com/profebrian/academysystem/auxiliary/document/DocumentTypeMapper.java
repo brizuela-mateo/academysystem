@@ -12,13 +12,11 @@ import java.util.List;
 public interface DocumentTypeMapper {
     DocumentTypeMapper INSTANCE = Mappers.getMapper(DocumentTypeMapper.class);
 
-    DocumentTypeResponseDTO toDocumentTypeDTO(DocumentType documentType);
+    DocumentTypeResponseDTO toResponseDTO(DocumentType documentType);
 
-    List<DocumentTypeResponseDTO> toDocumentTypeDTOList(List<DocumentType> countries);
+    List<DocumentTypeResponseDTO> toDTOList(List<DocumentType> countries);
 
-    List<DocumentType> toDocumentTypeList(List<DocumentTypeResponseDTO> documentTypeResponseDTOList);
+    DocumentType toSaveEntity(DocumentTypeSaveDTO documentTypeSaveDTO);
 
-    DocumentType toDocumentTypeEntity(DocumentTypeSaveDTO documentTypeSaveDTO);
-
-    DocumentType toDocumentTypeEntity(DocumentTypeRequestDTO documentTypeRequestDTO);
+    DocumentType toUpdateEntity(DocumentTypeRequestDTO documentTypeRequestDTO);
 }
