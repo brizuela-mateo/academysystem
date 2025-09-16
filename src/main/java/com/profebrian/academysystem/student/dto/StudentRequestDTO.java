@@ -20,6 +20,6 @@ public record StudentRequestDTO(@NotNull
                                 @NotNull
                                  Integer documentTypeId,
                                 @NotNull
-                                 Integer city,
+                                 Integer cityId,
                                 Integer tutorId) {
 }

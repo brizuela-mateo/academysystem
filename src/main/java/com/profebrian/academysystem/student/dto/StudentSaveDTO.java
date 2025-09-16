@@ -18,6 +18,6 @@ public record StudentSaveDTO(@NotNull @Size(max = 50)
                              @NotNull
                                  Integer documentTypeId,
                              @NotNull
-                                 Integer city,
+                                 Integer cityId,
                              Integer tutorId) {
 }
