@@ -1,10 +1,10 @@
-package com.profebrian.academysystem.tutor;
+package com.profebrian.academysystem.auxiliary.document;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Hidden
 @Repository
-public interface TutorRepository extends JpaRepository<Tutor, Integer> {
+@Hidden
+public interface DocumentTypeRepository extends JpaRepository<DocumentType, Integer> {
 }

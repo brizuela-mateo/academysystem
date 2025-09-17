@@ -1,6 +1,10 @@
 package com.profebrian.academysystem.tutor;
 
+import com.profebrian.academysystem.tutor.dto.TutorRequestDTO;
+import com.profebrian.academysystem.tutor.dto.TutorResponseDTO;
+import com.profebrian.academysystem.tutor.dto.TutorSaveDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -9,12 +13,12 @@ import java.util.List;
 public interface TutorMapper {
     TutorMapper INSTANCE = Mappers.getMapper(TutorMapper.class);
 
-    TutorDto tutorToDto(Tutor tutor);
+    @Mapping(source = "mainTutor.tutorId", target = "mainTutorId")
+    TutorResponseDTO toResponseDTO(Tutor tutor);
 
-    Tutor dtoToTutor(TutorDto tutorDto);
+    List<TutorResponseDTO> toResponseDTO(List<Tutor> tutors);
 
-    List<TutorDto> tutorsToDtoList(List<Tutor> tutors);
+    Tutor toUpdateEntity(TutorRequestDTO tutorRequestDTO);
 
-    List<Tutor> dtosToTutorList(List<TutorDto> tutorDtos);
-
+    Tutor toSaveEntity(TutorSaveDTO tutorSaveDTO);
 }
